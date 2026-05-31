@@ -1,0 +1,20 @@
+{
+  "name": "practica-sgbd-microservicio-oracle",
+  "version": "1.0.0",
+  "description": "Microservicio REST para verificar funcionamiento del SGBD Oracle Database",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "node src/app.js",
+    "test": "jest --runInBand --forceExit"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "oracledb": "^6.10.0"
+  },
+  "devDependencies": {
+    "jest": "^30.4.2",
+    "supertest": "^7.2.2"
+  }
+}

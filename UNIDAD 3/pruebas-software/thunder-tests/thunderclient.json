@@ -1,0 +1,297 @@
+{
+  "clientName": "Thunder Client",
+  "collectionName": "Pruebas SGBD (MySQL y Oracle)",
+  "collectionId": "col-sgbd-0001",
+  "dateExported": "2026-05-29T00:00:00.000Z",
+  "version": "1.2",
+  "folders": [
+    {
+      "_id": "fld-mysql-3000",
+      "name": "MySQL (puerto 3000)",
+      "containerId": "",
+      "created": "2026-05-29T00:00:00.000Z",
+      "sortNum": 10000
+    },
+    {
+      "_id": "fld-oracle-3010",
+      "name": "Oracle (puerto 3010)",
+      "containerId": "",
+      "created": "2026-05-29T00:00:00.000Z",
+      "sortNum": 20000
+    }
+  ],
+  "requests": [
+    {
+      "_id": "req-my-salud",
+      "colId": "col-sgbd-0001",
+      "containerId": "fld-mysql-3000",
+      "name": "Salud",
+      "url": "http://localhost:3000/api/salud",
+      "method": "GET",
+      "sortNum": 10000,
+      "created": "2026-05-29T00:00:00.000Z",
+      "modified": "2026-05-29T00:00:00.000Z",
+      "headers": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    },
+    {
+      "_id": "req-my-estado",
+      "colId": "col-sgbd-0001",
+      "containerId": "fld-mysql-3000",
+      "name": "Estado SGBD",
+      "url": "http://localhost:3000/api/sgbd/estado",
+      "method": "GET",
+      "sortNum": 11000,
+      "created": "2026-05-29T00:00:00.000Z",
+      "modified": "2026-05-29T00:00:00.000Z",
+      "headers": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    },
+    {
+      "_id": "req-my-listar",
+      "colId": "col-sgbd-0001",
+      "containerId": "fld-mysql-3000",
+      "name": "Listar estudiantes",
+      "url": "http://localhost:3000/api/estudiantes",
+      "method": "GET",
+      "sortNum": 12000,
+      "created": "2026-05-29T00:00:00.000Z",
+      "modified": "2026-05-29T00:00:00.000Z",
+      "headers": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    },
+    {
+      "_id": "req-my-obtener",
+      "colId": "col-sgbd-0001",
+      "containerId": "fld-mysql-3000",
+      "name": "Obtener por id",
+      "url": "http://localhost:3000/api/estudiantes/1",
+      "method": "GET",
+      "sortNum": 13000,
+      "created": "2026-05-29T00:00:00.000Z",
+      "modified": "2026-05-29T00:00:00.000Z",
+      "headers": []
+    },
+    {
+      "_id": "req-my-crear",
+      "colId": "col-sgbd-0001",
+      "containerId": "fld-mysql-3000",
+      "name": "Crear estudiante",
+      "url": "http://localhost:3000/api/estudiantes",
+      "method": "POST",
+      "sortNum": 14000,
+      "created": "2026-05-29T00:00:00.000Z",
+      "modified": "2026-05-29T00:00:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"nombre\": \"Juan Perez\",\n  \"email\": \"juan.perez@ejemplo.com\",\n  \"matricula\": \"2024001\"\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "201"
+        }
+      ]
+    },
+    {
+      "_id": "req-my-actualizar",
+      "colId": "col-sgbd-0001",
+      "containerId": "fld-mysql-3000",
+      "name": "Actualizar estudiante",
+      "url": "http://localhost:3000/api/estudiantes/1",
+      "method": "PUT",
+      "sortNum": 15000,
+      "created": "2026-05-29T00:00:00.000Z",
+      "modified": "2026-05-29T00:00:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"nombre\": \"Juan Perez Actualizado\",\n  \"email\": \"juan.perez@ejemplo.com\",\n  \"estado\": \"activo\"\n}",
+        "form": []
+      }
+    },
+    {
+      "_id": "req-my-eliminar",
+      "colId": "col-sgbd-0001",
+      "containerId": "fld-mysql-3000",
+      "name": "Eliminar estudiante",
+      "url": "http://localhost:3000/api/estudiantes/1",
+      "method": "DELETE",
+      "sortNum": 16000,
+      "created": "2026-05-29T00:00:00.000Z",
+      "modified": "2026-05-29T00:00:00.000Z",
+      "headers": []
+    },
+    {
+      "_id": "req-or-salud",
+      "colId": "col-sgbd-0001",
+      "containerId": "fld-oracle-3010",
+      "name": "Salud",
+      "url": "http://localhost:3010/api/salud",
+      "method": "GET",
+      "sortNum": 20000,
+      "created": "2026-05-29T00:00:00.000Z",
+      "modified": "2026-05-29T00:00:00.000Z",
+      "headers": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    },
+    {
+      "_id": "req-or-estado",
+      "colId": "col-sgbd-0001",
+      "containerId": "fld-oracle-3010",
+      "name": "Estado SGBD",
+      "url": "http://localhost:3010/api/sgbd/estado",
+      "method": "GET",
+      "sortNum": 21000,
+      "created": "2026-05-29T00:00:00.000Z",
+      "modified": "2026-05-29T00:00:00.000Z",
+      "headers": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    },
+    {
+      "_id": "req-or-listar",
+      "colId": "col-sgbd-0001",
+      "containerId": "fld-oracle-3010",
+      "name": "Listar estudiantes",
+      "url": "http://localhost:3010/api/estudiantes",
+      "method": "GET",
+      "sortNum": 22000,
+      "created": "2026-05-29T00:00:00.000Z",
+      "modified": "2026-05-29T00:00:00.000Z",
+      "headers": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    },
+    {
+      "_id": "req-or-obtener",
+      "colId": "col-sgbd-0001",
+      "containerId": "fld-oracle-3010",
+      "name": "Obtener por id",
+      "url": "http://localhost:3010/api/estudiantes/1",
+      "method": "GET",
+      "sortNum": 23000,
+      "created": "2026-05-29T00:00:00.000Z",
+      "modified": "2026-05-29T00:00:00.000Z",
+      "headers": []
+    },
+    {
+      "_id": "req-or-crear",
+      "colId": "col-sgbd-0001",
+      "containerId": "fld-oracle-3010",
+      "name": "Crear estudiante",
+      "url": "http://localhost:3010/api/estudiantes",
+      "method": "POST",
+      "sortNum": 24000,
+      "created": "2026-05-29T00:00:00.000Z",
+      "modified": "2026-05-29T00:00:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"nombre\": \"Juan Perez\",\n  \"email\": \"juan.perez@ejemplo.com\",\n  \"matricula\": \"2024001\"\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "201"
+        }
+      ]
+    },
+    {
+      "_id": "req-or-actualizar",
+      "colId": "col-sgbd-0001",
+      "containerId": "fld-oracle-3010",
+      "name": "Actualizar estudiante",
+      "url": "http://localhost:3010/api/estudiantes/1",
+      "method": "PUT",
+      "sortNum": 25000,
+      "created": "2026-05-29T00:00:00.000Z",
+      "modified": "2026-05-29T00:00:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"nombre\": \"Juan Perez Actualizado\",\n  \"email\": \"juan.perez@ejemplo.com\",\n  \"estado\": \"activo\"\n}",
+        "form": []
+      }
+    },
+    {
+      "_id": "req-or-eliminar",
+      "colId": "col-sgbd-0001",
+      "containerId": "fld-oracle-3010",
+      "name": "Eliminar estudiante",
+      "url": "http://localhost:3010/api/estudiantes/1",
+      "method": "DELETE",
+      "sortNum": 26000,
+      "created": "2026-05-29T00:00:00.000Z",
+      "modified": "2026-05-29T00:00:00.000Z",
+      "headers": []
+    }
+  ]
+}

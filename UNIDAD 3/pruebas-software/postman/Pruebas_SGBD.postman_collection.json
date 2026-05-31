@@ -1,0 +1,358 @@
+{
+  "info": {
+    "name": "Pruebas SGBD (MySQL y Oracle)",
+    "_postman_id": "a1b2c3d4-0001-4a5b-9c8d-000000000001",
+    "description": "Colección de pruebas HTTP para los microservicios REST de estudiantes (MySQL puerto 3000 y Oracle puerto 3010).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrlMySQL",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "baseUrlOracle",
+      "value": "http://localhost:3010",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "MySQL (puerto 3000)",
+      "item": [
+        {
+          "name": "Salud",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrlMySQL}}/api/salud",
+              "host": ["{{baseUrlMySQL}}"],
+              "path": ["api", "salud"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Estado SGBD",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrlMySQL}}/api/sgbd/estado",
+              "host": ["{{baseUrlMySQL}}"],
+              "path": ["api", "sgbd", "estado"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Listar estudiantes",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrlMySQL}}/api/estudiantes",
+              "host": ["{{baseUrlMySQL}}"],
+              "path": ["api", "estudiantes"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener por id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrlMySQL}}/api/estudiantes/1",
+              "host": ["{{baseUrlMySQL}}"],
+              "path": ["api", "estudiantes", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Crear estudiante",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 201\", () => pm.response.to.have.status(201));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Juan Perez\",\n  \"email\": \"juan.perez@ejemplo.com\",\n  \"matricula\": \"2024001\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrlMySQL}}/api/estudiantes",
+              "host": ["{{baseUrlMySQL}}"],
+              "path": ["api", "estudiantes"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar estudiante",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Juan Perez Actualizado\",\n  \"email\": \"juan.perez@ejemplo.com\",\n  \"estado\": \"activo\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrlMySQL}}/api/estudiantes/1",
+              "host": ["{{baseUrlMySQL}}"],
+              "path": ["api", "estudiantes", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar estudiante",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrlMySQL}}/api/estudiantes/1",
+              "host": ["{{baseUrlMySQL}}"],
+              "path": ["api", "estudiantes", "1"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Oracle (puerto 3010)",
+      "item": [
+        {
+          "name": "Salud",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrlOracle}}/api/salud",
+              "host": ["{{baseUrlOracle}}"],
+              "path": ["api", "salud"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Estado SGBD",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrlOracle}}/api/sgbd/estado",
+              "host": ["{{baseUrlOracle}}"],
+              "path": ["api", "sgbd", "estado"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Listar estudiantes",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrlOracle}}/api/estudiantes",
+              "host": ["{{baseUrlOracle}}"],
+              "path": ["api", "estudiantes"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener por id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrlOracle}}/api/estudiantes/1",
+              "host": ["{{baseUrlOracle}}"],
+              "path": ["api", "estudiantes", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Crear estudiante",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 201\", () => pm.response.to.have.status(201));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Juan Perez\",\n  \"email\": \"juan.perez@ejemplo.com\",\n  \"matricula\": \"2024001\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrlOracle}}/api/estudiantes",
+              "host": ["{{baseUrlOracle}}"],
+              "path": ["api", "estudiantes"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar estudiante",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Juan Perez Actualizado\",\n  \"email\": \"juan.perez@ejemplo.com\",\n  \"estado\": \"activo\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrlOracle}}/api/estudiantes/1",
+              "host": ["{{baseUrlOracle}}"],
+              "path": ["api", "estudiantes", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar estudiante",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrlOracle}}/api/estudiantes/1",
+              "host": ["{{baseUrlOracle}}"],
+              "path": ["api", "estudiantes", "1"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
