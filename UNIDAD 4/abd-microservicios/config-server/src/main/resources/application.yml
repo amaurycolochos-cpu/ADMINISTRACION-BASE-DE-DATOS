@@ -1,0 +1,17 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        native:
+          # Directorio donde se guardan los archivos de configuracion de cada servicio
+          search-locations: classpath:/config
+
+logging:
+  level:
+    root: INFO
+    org.springframework.cloud.config: DEBUG

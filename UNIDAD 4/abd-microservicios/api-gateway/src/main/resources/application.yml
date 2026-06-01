@@ -1,0 +1,28 @@
+server:
+  port: 8090
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      # Rutas hacia cada microservicio registrado en Eureka
+      routes:
+        - id: student-service
+          uri: lb://student-service
+          predicates:
+            - Path=/api/student/**
+        - id: course-service
+          uri: lb://course-service
+          predicates:
+            - Path=/api/course/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+logging:
+  level:
+    root: INFO
+    org.springframework.cloud.gateway: DEBUG
