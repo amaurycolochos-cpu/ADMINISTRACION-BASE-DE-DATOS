@@ -1,0 +1,88 @@
+/* aqui tampoco puse nada. Lo de la card, tabla, boton y estados esta compartido
+   en src/styles.css pa no andar repitiendo el mismo css en cada componente */
+
+/* Estilos para la seccion de busqueda por ID */
+.search-box {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.search-box h3 {
+  margin: 0 0 0.75rem 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+.search-box__form {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.search-box__form input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  width: 220px;
+}
+
+.search-result {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: #e8f5e9;
+  border-radius: 6px;
+}
+
+.search-result h4 {
+  margin: 0 0 0.5rem 0;
+  color: #2e7d32;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.form-field label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #555;
+}
+
+.form-field input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.state--success {
+  color: #2e7d32;
+  margin-top: 0.5rem;
+}
+
+/* Boton rojo para eliminar */
+.btn--danger {
+  background: #e53935;
+  color: #fff;
+  border: none;
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.btn--danger:hover {
+  background: #c62828;
+}

@@ -1,0 +1,133 @@
+<!-- Pantalla de estudiantes, misma estructura q la de cursos pero con mas columnas -->
+<section class="card">
+  <header class="card__header">
+    <div>
+      <h2>Lista de estudiantes</h2>
+      <p class="card__subtitle">
+        Datos consumidos desde el microservicio REST (PostgreSQL) en Linux ·
+        <code>/api/student/all</code>
+      </p>
+    </div>
+    <!-- recargar a mano. Bloqueado mientras esta cargando pa no spamear peticiones -->
+    <button class="btn" (click)="loadStudents()" [disabled]="loading()">
+      ↻ Recargar
+    </button>
+  </header>
+
+  <!-- Busqueda por ID -->
+  <div class="search-box">
+    <h3>Buscar estudiante por ID</h3>
+    <div class="search-box__form">
+      <input
+        type="number"
+        [(ngModel)]="searchId"
+        placeholder="Ingresa el ID del estudiante"
+        min="1"
+      />
+      <button class="btn" (click)="searchById()">Buscar</button>
+    </div>
+
+    @if (searchError()) {
+      <p class="state state--error">⚠ {{ searchError() }}</p>
+    }
+
+    @if (foundStudent()) {
+      <div class="search-result">
+        <h4>Estudiante encontrado:</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Email</th>
+              <th>Curso (ID)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{ foundStudent()!.id }}</td>
+              <td>{{ foundStudent()!.name }}</td>
+              <td>{{ foundStudent()!.lastName }}</td>
+              <td>{{ foundStudent()!.email }}</td>
+              <td>{{ foundStudent()!.courseId }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    }
+  </div>
+
+  <!-- Los 4 estados de siempre: cargando / error / vacio / con datos -->
+  @if (loading()) {
+    <p class="state state--loading">Cargando estudiantes…</p>
+  } @else if (error()) {
+    <p class="state state--error">⚠ {{ error() }}</p>
+  } @else if (students().length === 0) {
+    <p class="state">No hay estudiantes registrados.</p>
+  } @else {
+    <!-- si hay alumnos, los vacio en la tabla -->
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+            <th>Curso (ID)</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Recorro alumno por alumno. el track student.id es pa el rendimiento -->
+          @for (student of students(); track student.id) {
+            <tr>
+              <td>{{ student.id }}</td>
+              <td>{{ student.name }}</td>
+              <td>{{ student.lastName }}</td>
+              <td>{{ student.email }}</td>
+              <td>{{ student.courseId }}</td>
+              <td>
+                <button class="btn btn--danger" (click)="deleteStudent(student.id)">Eliminar</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <!-- cuantos alumnos en total -->
+    <p class="card__count">Total: {{ students().length }} estudiante(s)</p>
+  }
+
+  <!-- Formulario para registrar nuevo estudiante -->
+  <div class="search-box" style="margin-top: 2rem;">
+    <h3>Registrar nuevo estudiante</h3>
+    <div class="form-grid">
+      <div class="form-field">
+        <label>Nombre</label>
+        <input type="text" [(ngModel)]="newStudent.name" placeholder="Juan" />
+      </div>
+      <div class="form-field">
+        <label>Apellido</label>
+        <input type="text" [(ngModel)]="newStudent.lastName" placeholder="Pérez" />
+      </div>
+      <div class="form-field">
+        <label>Email</label>
+        <input type="email" [(ngModel)]="newStudent.email" placeholder="juan@mail.com" />
+      </div>
+      <div class="form-field">
+        <label>Curso (ID)</label>
+        <input type="number" [(ngModel)]="newStudent.courseId" placeholder="1" min="1" />
+      </div>
+    </div>
+    <button class="btn" (click)="createStudent()" style="margin-top: 0.75rem;">Registrar</button>
+
+    @if (createSuccess()) {
+      <p class="state state--success">✓ {{ createSuccess() }}</p>
+    }
+    @if (createError()) {
+      <p class="state state--error">⚠ {{ createError() }}</p>
+    }
+  </div>
+</section>

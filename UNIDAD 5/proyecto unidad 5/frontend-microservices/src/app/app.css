@@ -1,0 +1,89 @@
+/* Estilos SOLO del cascaron (la barra de arriba, el contenido y el footer).
+   lo de las tablas y cards va aparte en styles.css */
+
+/* el contenedor de todo, lo pongo en columna y q ocupe toda la altura
+   pa q el footer se quede pegado abajo aunq haya poquito contenido */
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- barra de arriba (topbar) ---- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* logo a la izq, menu a la der */
+  gap: 1rem;
+  flex-wrap: wrap; /* En pantallas chicas q se acomode en varias lineas */
+  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, #1e3a8a, #2563eb); /* degradado azulito */
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.topbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.topbar__logo {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.topbar__tagline {
+  margin: 0.15rem 0 0;
+  font-size: 0.8rem;
+  opacity: 0.85; /* Medio transparente pa q se vea secundario */
+}
+
+/* ---- el menu de navegacion ---- */
+.topbar__nav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.topbar__nav a {
+  color: #fff;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 999px; /* bien redondito tipo pastilla */
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.topbar__nav a:hover {
+  background: rgba(255, 255, 255, 0.15); /* Se aclara tantito al pasar el mouse */
+}
+
+/* el link de la pagina en la q estoy parado se pinta blanco con texto azul */
+.topbar__nav a.active {
+  background: #fff;
+  color: #1e3a8a;
+}
+
+/* ---- zona del contenido ---- */
+.content {
+  flex: 1; /* q se estire pa empujar el footer hasta abajo */
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto; /* centrado */
+  padding: 2rem 1.5rem;
+}
+
+/* ---- Pie de pagina ---- */
+.footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.8rem;
+  color: #64748b;
+  border-top: 1px solid #e2e8f0;
+}

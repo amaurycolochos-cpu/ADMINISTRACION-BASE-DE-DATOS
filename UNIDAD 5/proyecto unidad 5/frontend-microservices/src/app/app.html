@@ -1,0 +1,32 @@
+<!-- Layout general de la app: barra de arriba + contenido + pie de pagina -->
+<div class="layout">
+  <!-- barra superior con el logo, el titulo y el menu de navegacion -->
+  <header class="topbar">
+    <div class="topbar__brand">
+      <span class="topbar__logo">⛁</span>
+      <div>
+        <!-- El title() sale del signal q tengo en app.ts -->
+        <h1>{{ title() }}</h1>
+        <p class="topbar__tagline">
+          Angular en Windows → Microservicios REST en Linux → PostgreSQL / Oracle
+        </p>
+      </div>
+    </div>
+
+    <!-- menu. el routerLinkActive le pone la clase "active" al link en el q estoy
+         parado, asi se resalta solito cual pestaña esta abierta -->
+    <nav class="topbar__nav">
+      <a routerLink="/students" routerLinkActive="active">Estudiantes</a>
+      <a routerLink="/courses" routerLinkActive="active">Cursos</a>
+    </nav>
+  </header>
+
+  <!-- Aqui es donde angular mete la pagina segun la ruta (estudiantes o cursos) -->
+  <main class="content">
+    <router-outlet />
+  </main>
+
+  <footer class="footer">
+    Evidencia 2 · Arquitectura distribuida · Administración de Bases de Datos
+  </footer>
+</div>

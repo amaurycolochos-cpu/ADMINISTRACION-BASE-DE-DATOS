@@ -1,0 +1,82 @@
+services:
+
+  # ---------- PostgreSQL (estudiantes) ----------
+  postgres:
+    image: postgres:16-alpine
+    container_name: escuela-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+      POSTGRES_DB: escuela
+    ports:
+      # Afuera (en mi windows) lo expongo en el 5433 xq el 5432 a veces ya lo
+      # tiene ocupado otro contenedor. esto es nomas pa conectarme yo a revisar;
+      # los micros entre ellos se hablan por la red interna con "postgres:5432"
+      - "5433:5432"
+    volumes:
+      # los .sql q meta en esta carpeta se corren SOLOS la primera vez q nace la bd
+      - ./docker/postgres:/docker-entrypoint-initdb.d:ro
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      # Asi docker sabe q postgres ya esta listo de verdad antes de prender el micro
+      test: ["CMD-SHELL", "pg_isready -U postgres -d escuela"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  # ---------- Oracle Free (cursos) ----------
+  oracle:
+    image: gvenzl/oracle-free:slim
+    container_name: escuela-oracle
+    environment:
+      ORACLE_PASSWORD: oracle123          # password del SYS / SYSTEM
+      APP_USER: escuela                   # El usuario q usa la app
+      APP_USER_PASSWORD: escuela123
+    ports:
+      - "1521:1521"
+    volumes:
+      # Igual q en postgres, los scripts de aqui se ejecutan solitos al inicio
+      - ./docker/oracle:/container-entrypoint-initdb.d:ro
+      - oracle-data:/opt/oracle/oradata
+    healthcheck:
+      test: ["CMD", "healthcheck.sh"]
+      interval: 15s
+      timeout: 10s
+      retries: 30   # oracle tarda un buen en arrancar, x eso tantos reintentos
+
+  # ---------- Microservicio Student ----------
+  student-service:
+    build: ./student-service
+    container_name: student-service
+    depends_on:
+      postgres:
+        condition: service_healthy   # espera a q postgres este sano antes de prender
+    environment:
+      # OJO: aqui el host de la bd NO es localhost, es "postgres" (el nombre del
+      # servicio de arriba). Asi se ubican entre ellos dentro de docker
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/escuela
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres123
+    ports:
+      - "8090:8090"
+
+  # ---------- Microservicio Course ----------
+  course-service:
+    build: ./course-service
+    container_name: course-service
+    depends_on:
+      oracle:
+        condition: service_healthy
+    environment:
+      # Oracle free trae por dentro una pluggable database q se llama FREEPDB1,
+      # x eso la url termina en /FREEPDB1
+      SPRING_DATASOURCE_URL: jdbc:oracle:thin:@oracle:1521/FREEPDB1
+      SPRING_DATASOURCE_USERNAME: escuela
+      SPRING_DATASOURCE_PASSWORD: escuela123
+    ports:
+      - "8080:8080"
+
+# Estos volumes son pa q los datos NO se borren cuando apago los contenedores
+volumes:
+  postgres-data:
+  oracle-data:

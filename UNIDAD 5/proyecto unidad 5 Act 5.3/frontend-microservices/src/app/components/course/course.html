@@ -1,0 +1,121 @@
+<!-- vista de los cursos. Todo va dentro de una "card" pa q se vea ordenadito -->
+<section class="card">
+  <header class="card__header">
+    <div>
+      <h2>Lista de cursos</h2>
+      <p class="card__subtitle">
+        Datos consumidos desde el microservicio REST (Oracle) en Linux ·
+        <code>/api/course/all</code>
+      </p>
+    </div>
+    <!-- Boton para volver a pedir los datos. lo deshabilito mientras carga
+         asi el usuario no anda picandole mil veces -->
+    <button class="btn" (click)="loadCourses()" [disabled]="loading()">
+      ↻ Recargar
+    </button>
+  </header>
+
+  <!-- Formulario para registrar curso (Ejercicio 5 - POST) -->
+  <div class="search-box">
+    <h3>Registrar nuevo curso</h3>
+    <div class="search-box__form" style="flex-direction: column; gap: 0.5rem;">
+      <input
+        type="text"
+        [(ngModel)]="newCourseName"
+        placeholder="Nombre del curso"
+      />
+      <input
+        type="text"
+        [(ngModel)]="newCourseDescription"
+        placeholder="Descripción del curso"
+      />
+      <button class="btn" (click)="createCourse()">Registrar curso</button>
+    </div>
+
+    @if (createError()) {
+      <p class="state state--error">⚠ {{ createError() }}</p>
+    }
+
+    @if (createSuccess()) {
+      <p class="state state--success">✔ {{ createSuccess() }}</p>
+    }
+  </div>
+
+  <!-- Busqueda por ID -->
+  <div class="search-box">
+    <h3>Buscar curso por ID</h3>
+    <div class="search-box__form">
+      <input
+        type="number"
+        [(ngModel)]="searchId"
+        placeholder="Ingresa el ID del curso"
+        min="1"
+      />
+      <button class="btn" (click)="searchById()">Buscar</button>
+    </div>
+
+    @if (searchError()) {
+      <p class="state state--error">⚠ {{ searchError() }}</p>
+    }
+
+    @if (foundCourse()) {
+      <div class="search-result">
+        <h4>Curso encontrado:</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Descripción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{ foundCourse()!.id }}</td>
+              <td>{{ foundCourse()!.name }}</td>
+              <td>{{ foundCourse()!.description }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    }
+  </div>
+
+  <!-- aqui va la magia de los estados. Segun como ande, muestro una cosa u otra: -->
+  @if (loading()) {
+    <!-- 1) mientras carga -->
+    <p class="state state--loading">Cargando cursos…</p>
+  } @else if (error()) {
+    <!-- 2) Si trono algo, sale el mensaje de error -->
+    <p class="state state--error">⚠ {{ error() }}</p>
+  } @else if (courses().length === 0) {
+    <!-- 3) cargo bien pero no habia ningun curso -->
+    <p class="state">No hay cursos registrados.</p>
+  } @else {
+    <!-- 4) Caso feliz: si hay cursos los pinto en la tabla -->
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- recorro la lista con el @for. El track course.id es pa q angular
+               sepa identificar cada fila y no se haga bolas al re-renderizar -->
+          @for (course of courses(); track course.id) {
+            <tr>
+              <td>{{ course.id }}</td>
+              <td>{{ course.name }}</td>
+              <td>{{ course.description }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <!-- Contadorcito de cuantos cursos salieron -->
+    <p class="card__count">Total: {{ courses().length }} curso(s)</p>
+  }
+</section>

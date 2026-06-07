@@ -1,0 +1,144 @@
+/* ===== estilos GLOBALES =====
+   Aqui pongo todo lo q se usa en mas de un lado (las cards, las tablas, el boton,
+   los estados de carga/error). asi los componentes de cursos y estudiantes
+   reusan lo mismo y no ando copiando css por todos lados */
+
+/* El box-sizing en * es casi obligado, asi el padding no me descuadra los anchos */
+* {
+  box-sizing: border-box;
+}
+
+/* quito los margenes/padding raros q traen html y body por defecto */
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: #f1f5f9; /* gris muy clarito de fondo */
+  color: #0f172a;
+  line-height: 1.5;
+}
+
+/* ===== la tarjeta blanca q envuelve cada tabla ===== */
+.card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px; /* Esquinas redondeadas */
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06); /* sombrita suave */
+}
+
+.card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between; /* Titulo a un lado, boton recargar al otro */
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.card__header h2 {
+  margin: 0;
+  font-size: 1.35rem;
+}
+
+.card__subtitle {
+  margin: 0.25rem 0 0;
+  font-size: 0.85rem;
+  color: #64748b; /* Gris pa q se vea como texto secundario */
+}
+
+/* el textito tipo codigo (ej: /api/course/all) con fondito gris */
+.card__subtitle code,
+code {
+  background: #f1f5f9;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.card__count {
+  margin: 1rem 0 0;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+/* ===== El boton de Recargar ===== */
+.btn {
+  border: 1px solid #2563eb;
+  background: #2563eb;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  white-space: nowrap; /* q el texto del boton no se parta en 2 lineas */
+}
+
+.btn:hover:not(:disabled) {
+  background: #1d4ed8; /* Azul un poco mas oscuro al pasar el mouse */
+}
+
+/* cuando esta cargando lo deshabilito, lo pongo medio transparente y con cursor de bloqueado */
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ===== la tabla ===== */
+/* El wrapper con overflow-x es pa q en celular se pueda hacer scroll
+   horizontal y la tabla no se desborde feo */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse; /* Sin dobles bordes entre celdas */
+  font-size: 0.92rem;
+}
+
+/* Encabezados de la tabla */
+thead th {
+  text-align: left;
+  background: #f8fafc;
+  color: #475569;
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+tbody td {
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid #eef2f7;
+}
+
+/* la fila se ilumina tantito cuando le paso el mouse encima */
+tbody tr:hover {
+  background: #f8fafc;
+}
+
+/* ===== Los mensajitos de estado (cargando / error / vacio) ===== */
+.state {
+  padding: 1rem;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #475569;
+  margin: 0;
+}
+
+/* el de "cargando..." en azul */
+.state--loading {
+  color: #2563eb;
+}
+
+/* El de error en rojo, q se note bien q algo salio mal */
+.state--error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+}
