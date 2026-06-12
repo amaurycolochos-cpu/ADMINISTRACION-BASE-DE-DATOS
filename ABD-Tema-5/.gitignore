@@ -1,0 +1,17 @@
+# Archivos de presentación
+*.pptx
+
+# Dependencias
+node_modules/
+
+# Build output
+dist/
+.angular/
+
+# Logs
+*.log
+
+# Otros
+.env
+*.tmp
+~$*
